@@ -26,5 +26,5 @@ spec:
       - name: nginx
         image: nagendra80/backend:{{ .Values.deployment.version }}
         envFrom:
-        - configMaoRef:
-          name: backend
+        - configMapRef:
+            name: backend
