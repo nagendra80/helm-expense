@@ -10,7 +10,7 @@ spec:
       project: expense
       tier: db # has to match .spec.template.metadata.labels
   serviceName: "mysql-headless"
-  replicas: {{ .Values.StatefulSet.replicas }} # by default is 1
+  replicas: {{ .Values.statefulset.replicas }} # by default is 1
   minReadySeconds: 10 # by default is 0
   template:
     metadata:
@@ -28,12 +28,12 @@ spec:
           mountPath: /var/lib/mysql
   # Instead of creating a PVC resource, you can directly provide in statefulset
   volumeClaimTemplates:
-  - matadata:
-    name: mysql
-    namespace: expense
-  spec:
-    accessModes: [ "ReadWriteOnce" ]
-    storageClassName: "ebs-sc"
-    resources:
-      requests:
-        storage: {{ .Values.statefulset.storage }}
+  - metadata:
+      name: mysql
+      namespace: expense
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "ebs-sc"
+      resources:
+        requests:
+          storage: {{ .Values.statefulset.storage }}
